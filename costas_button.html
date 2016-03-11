@@ -4,18 +4,87 @@
     <template>
         <style>
             /* My custom rules */
+
+            .main-button {
+                -moz-box-shadow: 0px 1px 0px 0px #fff6af;
+                -webkit-box-shadow: 0px 1px 0px 0px #fff6af;
+                box-shadow: 0px 1px 0px 0px #fff6af;
+                background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
+                background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+                background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
+                background-color:#ffec64;
+                -moz-border-radius:6px;
+                -webkit-border-radius:6px;
+                border-radius:6px;
+                border:1px solid #ffaa22;
+                display:inline-block;
+                cursor:pointer;
+                color:#333333;
+                font-family:Arial;
+                font-size:15px;
+                font-weight:bold;
+                padding:6px 24px;
+                text-decoration:none;
+                text-shadow:0px 1px 0px #ffee66;
+            }
+            .main-button:hover {
+                    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
+                    background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                    background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                    background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                    background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+                    background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+                    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
+                    background-color:#ffab23;
+            }
+            .main-button:active {
+                    position:relative;
+                    top:1px;
+            }
+
+            .disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
         </style>
 
-    <!-- local DOM for costas-button -->
+        <!-- local DOM for costas-button -->
+        <button class="main-button" type="submit" value={{value}}>{{label}}</button>
+
     </template>
 
     <script>
-        // Now register the Element
+        "use strict";
+
+        var alertDisplayed = false;
+
         Polymer({
             is: "costas-button",
 
+            ready: function () {
+                console.log("Costas component is ready");
+            },
+
             properties: {
                 // properties fo the public API
+                label: String,
+                value: String
+            },
+
+            listeners: {
+                'tap': 'alertOnce',
+            },
+
+            alertOnce: function (e) {
+                console.log("alert Once was called!");
+                if (!alertDisplayed) {
+                    alert("Child was tapped");
+                    alertDisplayed = true;
+                }
             }
         });
     </script>
